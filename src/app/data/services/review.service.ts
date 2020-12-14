@@ -39,7 +39,7 @@ export class ReviewLocalStorageService {
    * Writes an array of Reviews to local storage (CACHE)
    * @param data Reviews array which needs to be stored
    */
-  async write(data: Review[]): Promise<any> {
+  async write(data: Review[]): Promise<void> {
     return await Plugins.Storage.set({ key: 'reviews', value: JSON.stringify(data) });
   }
 }

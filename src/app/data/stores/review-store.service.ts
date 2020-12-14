@@ -33,7 +33,7 @@ export class ReviewStoreService extends StoreService {
    * Adds review to an existing array of reviews
    * @param review Review object which must be appended to array
    */
-  addReview(review: Review) {
+  addReview(review: Review): void {
     const reviewsClone = [...this.reviews];
     reviewsClone.push(review);
     this.reviews = reviewsClone;
@@ -43,19 +43,19 @@ export class ReviewStoreService extends StoreService {
    * Removes Review from an existing array of reviews
    * @param reviewId reviewId based on which we filter.
    */
-  removeReview(reviewId: string) {
+  removeReview(reviewId: string): void {
     this.reviews = this.reviews.filter(review => review.reviewId !== reviewId);
   }
 
-  submitReview(review: Review) {
+  submitReview(review: Review): void {
     this.addReview(review);
   }
 
-  async storeReviewsToLocalStorage() {
-    await this.storageService.write(this.reviews);
+  async storeReviewsToLocalStorage(): Promise<void> {
+    return await this.storageService.write(this.reviews);
   }
 
-  storeLastReviewToAPI() {
+  storeLastReviewToAPI(): void {
     const review = this.reviews[this.reviews.length - 1];
 
     if (review instanceof Review) {
@@ -65,7 +65,7 @@ export class ReviewStoreService extends StoreService {
     }
   }
 
-  fetchReviewsFromLocalStorage() {
+  fetchReviewsFromLocalStorage(): void {
     this.storageService.read().then(reviews => {
       this.reviews = reviews;
     });

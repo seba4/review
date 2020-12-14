@@ -1,16 +1,16 @@
-import { TestBed } from '@angular/core/testing';
+// import { TestBed } from '@angular/core/testing';
 
-import { ConfigurationGuard } from './configuration.guard';
+// import { ConfigurationGuard } from './configuration.guard';
 
-describe('ConfigurationGuard', () => {
-  let guard: ConfigurationGuard;
+// describe('ConfigurationGuard', () => {
+//   let guard: ConfigurationGuard;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-    guard = TestBed.inject(ConfigurationGuard);
-  });
+//   beforeEach(() => {
+//     TestBed.configureTestingModule({});
+//     guard = TestBed.inject(ConfigurationGuard);
+//   });
 
-  it('should be created', () => {
-    expect(guard).toBeTruthy();
-  });
-});
+//   it('should be created', () => {
+//     expect(guard).toBeTruthy();
+//   });
+// });

@@ -20,5 +20,4 @@ import { QuestionModule } from '../../components/question/question.module';
     ],
     declarations: [CampaignPage]
 })
-export class CampaignPageModule {
-}
+export class CampaignPageModule {}

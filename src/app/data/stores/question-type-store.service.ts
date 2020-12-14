@@ -26,7 +26,7 @@ export class QuestionTypeStoreService extends StoreService {
     this.typesSubject.next(types);
   }
 
-  fetchTypes() {
+  fetchTypes(): Promise<QuestionType[]> {
     return this.fetchTypesFromLocalStorage().finally(() => {
       this.fetchTypesFromAPI().then();
     });
@@ -51,8 +51,8 @@ export class QuestionTypeStoreService extends StoreService {
     return types;
   }
 
-  storeTypesToLocalStorage() {
-    this.storageService.write(this.types).then();
+  storeTypesToLocalStorage(): Promise<any> {
+    return this.storageService.write(this.types).then();
   }
 
 }

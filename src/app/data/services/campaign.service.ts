@@ -134,7 +134,7 @@ export class CampaignLocalStorageService {
    * Writes campaign information to local storage (CACHE)
    * @param campaign Campaign object which needs to be stored
    */
-  async writeCampaign(campaign: Campaign) {
+  async writeCampaign(campaign: Campaign): Promise<void> {
     return await Plugins.Storage.set({ key: 'campaign', value: JSON.stringify(campaign) });
   }
 }

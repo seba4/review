@@ -28,13 +28,13 @@ export class AccountStoreService extends StoreService {
     this.accountSubject.next(account);
   }
 
-  registerDevice(tempUsername: string, tempPassword: string) {
+  registerDevice(tempUsername: string, tempPassword: string): void {
     this.apiService.registerDevice(tempUsername, tempPassword).subscribe(account => {
       this.account = account;
     });
   }
 
-  async fetchAccountFromLocalStorage() {
+  async fetchAccountFromLocalStorage(): Promise<Account> {
     const account = await this.storageService.read();
 
     if (!this.account) {
@@ -53,8 +53,8 @@ export class AccountStoreService extends StoreService {
   }
 
 
-  saveAccountToLocalStorage() {
-    this.storageService.write(this.account).then();
+  saveAccountToLocalStorage(): Promise<any> {
+    return this.storageService.write(this.account).then();
   }
 
 }
