@@ -39,7 +39,7 @@ export class CampaignStoreService extends StoreService {
   /**
    * Stores latest campaign information to Local Storage
    */
-  storeCampaignSettingsToCache() {
+  storeCampaignSettingsToCache(): void {
     this.storageService.writeCampaign(this.latestCampaignSettings);
   }
 
@@ -47,7 +47,7 @@ export class CampaignStoreService extends StoreService {
   /**
    * Updates current campaign settings with the latest loaded campaign Settings
    */
-  syncCampaignSettings() {
+  syncCampaignSettings(): void {
     this.currentCampaignSettings = this.latestCampaignSettings;
   }
 
@@ -85,7 +85,7 @@ export class CampaignStoreService extends StoreService {
   /**
    * Fetches Campaign information from API.
    */
-  fetchCampaignFromAPI() {
+  fetchCampaignFromAPI(): void {
     this.apiService.readCampaignSettings().subscribe(apiSettings => {
         if (!(apiSettings instanceof Campaign)) {
           return;

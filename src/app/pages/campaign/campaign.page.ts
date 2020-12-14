@@ -100,7 +100,7 @@ export class CampaignPage implements OnInit {
     return this.campaign.questions.length === questionIndex + 1;
   }
 
-  submitCampaign() {
+  submitCampaign(): void {
     this.activeQuestion = null;
 
     setTimeout(
@@ -123,7 +123,7 @@ export class CampaignPage implements OnInit {
     this.reviewStore.submitReview(review);
   }
 
-  resetCampaign() {
+  resetCampaign(): void {
     if (this.campaignStore.latestCampaignSettings !== this.campaignStore.currentCampaignSettings) {
       this.campaignStore.syncCampaignSettings();
     }
