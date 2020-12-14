@@ -1,16 +1,24 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { IfConfiguredGuard } from '@guards/configuration.guard';
 
 const routes: Routes = [
   {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    path: 'device-setup',
+    pathMatch: 'full',
+    loadChildren: () => import('./pages/device-setup/device-setup.module').then(m => m.DeviceSetupPageModule)
+    // canLoad: [IfNotConfiguredGuard]
+  },
+  {
+    path: 'campaign',
+    loadChildren: () => import('./pages/campaign/campaign.module').then(m => m.CampaignPageModule),
+    canLoad: [IfConfiguredGuard]
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'campaign',
     pathMatch: 'full'
-  },
+  }
 ];
 
 @NgModule({
@@ -19,4 +27,5 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

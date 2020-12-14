@@ -1,0 +1,30 @@
+<ion-content class="background" padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col offset-md="2" offset-xs="1" size-md="8" size-xs="10">
+        <ng-container [ngTemplateOutlet]="isQuestionareActive() ? Question: ThankYou"></ng-container>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-footer>
+  <ion-title>©review.me <span>(1.1.1)</span></ion-title>
+</ion-footer>
+
+
+<ng-template #Question>
+  <app-question [questionSubj]="questionSubj" [question]="activeQuestion"
+                [type]="getQuestionType()"></app-question>
+</ng-template>
+
+<ng-template #ThankYou>
+  <ion-card class="campaign-thank-you-message" color="secondary">
+    <ion-title color="primary">
+      <div style="white-space: normal;">
+        Thank you for your feedback
+      </div>
+    </ion-title>
+  </ion-card>
+</ng-template>
+

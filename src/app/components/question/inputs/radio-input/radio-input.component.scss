@@ -1,0 +1,13 @@
+
+ion-label {
+  color: var(--ion-color-light) !important;
+}
+
+.item-radio-checked {
+  background: red !important;
+
+  ion-label {
+    color: var(--ion-color-secondary) !important;
+  }
+
+}

@@ -1,0 +1,10 @@
+<form *ngIf="form" [formGroup]="form">
+  <ion-list>
+    <ion-radio-group formControlName="options">
+      <ion-item *ngFor="let option of inputOptions">
+        <ion-label>{{option.title}}</ion-label>
+        <ion-radio [value]="option.value" color='secondary' slot="start"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
+</form>

@@ -1,0 +1,10 @@
+<form (ngSubmit)="submitForm()" *ngIf="form" [formGroup]="form" padding>
+  <ion-item padding>
+    <ion-input [type]="inputType" autofocus formControlName="value"></ion-input>
+  </ion-item>
+  <br>
+  <br>
+  <ion-button (click)="submitForm()" *ngIf="isFormValid()" color="secondary" expand="full" fill="outline" slot="end">
+    Continue
+  </ion-button>
+</form>

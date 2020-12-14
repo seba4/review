@@ -1,0 +1,15 @@
+<app-question-simple-input (inputSubmit)="onSubmit($event)"
+                           *ngIf="isCorrectType(questionTypes.TEXT_INPUT)" inputType="text"></app-question-simple-input>
+<app-question-simple-input (inputSubmit)="onSubmit($event)"
+                           *ngIf="isCorrectType(questionTypes.NUMBER_INPUT)"
+                           inputType="number"></app-question-simple-input>
+
+<app-question-radio-input (inputSubmit)="onSubmit($event)"
+                          *ngIf="isCorrectType(questionTypes.RADIO_INPUT)"
+                          [inputOptions]="question.answerOptions"></app-question-radio-input>
+<app-question-checkbox-input (inputSubmit)="onSubmit($event)"
+                             *ngIf="isCorrectType(questionTypes.CHECK_BOX_INPUT)"
+                             [inputOptions]="question.answerOptions"></app-question-checkbox-input>
+<app-question-stars-input (inputSubmit)="onSubmit($event)"
+                          *ngIf="isCorrectType(questionTypes.STAR_INPUT)"
+                          [inputOptions]="question.answerOptions"></app-question-stars-input>

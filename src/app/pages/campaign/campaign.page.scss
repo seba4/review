@@ -1,0 +1,49 @@
+@import "src/styles/variables";
+
+
+@media screen and (orientation: portrait) {
+
+  ion-content {
+    //position: relative;
+
+    &.background {
+      --background: url('/assets/stars.png') var(--ion-color-primary) repeat-x left bottom / 40% auto;
+    }
+  }
+}
+
+@media screen and (orientation: landscape) {
+
+  ion-content {
+    //position: relative;
+
+    &.background {
+      --background: url('/assets/stars.png') var(--ion-color-primary) repeat-x left bottom / 15% auto;
+    }
+  }
+}
+
+
+ion-footer, ion-content {
+  --ion-background-color: var(--ion-color-primary);
+  background-color: var(--ion-color-secondary);
+}
+
+
+ion-footer {
+  ion-title {
+    font-size: 1em;
+    padding: 0.2em;
+    text-align: center;
+
+    span {
+      font-weight: normal;
+    }
+  }
+}
+
+.campaign-thank-you-message {
+  margin-top: 25%;
+  padding: 25px;
+  text-align: center;
+}

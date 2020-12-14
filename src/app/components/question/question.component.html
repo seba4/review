@@ -1,0 +1,13 @@
+<ion-grid *ngIf="question">
+  <ion-row>
+    <ion-col class="ion-text-center" padding>
+      <ion-label text-wrap> {{ question.title }}</ion-label>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <app-question-inputs (inputSubmit)="onSubmit($event)" [questionType]="type"
+                           [question]="question"></app-question-inputs>
+    </ion-col>
+  </ion-row>
+</ion-grid>

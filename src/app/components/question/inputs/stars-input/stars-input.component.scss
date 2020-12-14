@@ -1,0 +1,10 @@
+ion-list {
+  display: table;
+  table-layout: fixed;
+  margin: 0 auto;
+
+  ion-button {
+    display: table-cell;
+    //max-width: 30px;
+  }
+}
