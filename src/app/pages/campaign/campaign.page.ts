@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Campaign } from '@schema/campaign';
 import { CampaignStoreService } from '@stores/campaign-store.service';
 import { Question } from '@schema/question';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, forkJoin, Observable } from 'rxjs';
 import { QuestionWithAnswersI } from '@schema/question-answer';
 import { QuestionType } from '@schema/question-type';
 import { QuestionTypeStoreService } from '@stores/question-type-store.service';
@@ -21,7 +21,7 @@ export class CampaignPage implements OnInit {
   answeredQuestions: QuestionWithAnswersI[] = [];
   questionTypes: QuestionType[];
   questionObs: Observable<QuestionWithAnswersI> = this.questionSubj.asObservable();
-  succesfullSubmitTimeout = 10000;
+  successfulSubmitTimeout = 10000;
 
   constructor(
     private campaignStore: CampaignStoreService,
@@ -35,12 +35,26 @@ export class CampaignPage implements OnInit {
   }
 
   ngOnInit() {
-    this.questionTypeStore.fetchTypes();
-    this.campaignStore.fetchCampaign();
+    // Fetch all Types and Fetch campaign
+    // Fetch Types and then Fetch Campaign (Both must exist for us to continue)
+
+    // First load all data from cache.
+    // If exist then render it to user
+
+    // next to it request for new API information to get latest data (don't notify user if data can't be gathered)
+    // if campaign is not in progress then replace it with latest data
+    // if in progress store campaign information asLatest. We will replace it when campaign is finished.
+
+    forkJoin([this.questionTypeStore.fetchTypes(), this.campaignStore.fetchCampaign()]).subscribe( ([types, campaign]) => {
+        this.campaign = this.campaignStore.currentCampaignSettings
+        this.successfulSubmitTimeout = this.campaign?.succesfullSubmitTimeout;
+
+    })
+
 
     this.campaignStore.currentCampaignSettings$.subscribe(campaign => {
       this.campaign = campaign;
-      this.succesfullSubmitTimeout = this.campaign?.succesfullSubmitTimeout;
+      this.successfulSubmitTimeout = this.campaign?.succesfullSubmitTimeout;
       this.activeQuestion = this.campaign?.questions[0];
     });
     this.questionTypeStore.types$.subscribe(types => {
@@ -93,7 +107,7 @@ export class CampaignPage implements OnInit {
       () => {
         this.resetCampaign();
         // Add timeout mark on page
-      }, this.succesfullSubmitTimeout);
+      }, this.successfulSubmitTimeout);
 
     const review = new Review({
       campaignId: this.campaign.campaignId,

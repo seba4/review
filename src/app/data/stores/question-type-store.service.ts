@@ -27,7 +27,7 @@ export class QuestionTypeStoreService extends StoreService {
   }
 
   fetchTypes() {
-    this.fetchTypesFromLocalStorage().finally(() => {
+    return this.fetchTypesFromLocalStorage().finally(() => {
       this.fetchTypesFromAPI().then();
     });
   }

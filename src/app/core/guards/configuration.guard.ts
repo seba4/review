@@ -3,11 +3,14 @@ import { CanLoad, Route, Router, UrlSegment } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { AccountStoreService } from '@stores/account-store.service';
 
+/**
+ * Guard which passes if Application is Already configured
+ */
 @Injectable({
   providedIn: 'root'
 })
 export class IfConfiguredGuard implements CanLoad {
-  constructor(private router: Router, private accountStore: AccountStoreService) {
+  constructor(private router: Router) {
   }
 
 
@@ -20,16 +23,19 @@ export class IfConfiguredGuard implements CanLoad {
     // }
 
     // return this.accountStore.isConfigured();
-    return of(true)
+    return true;
   }
 }
 
 
+/**
+ * Guard which passes if Application is not Already configured
+ */
 @Injectable({
   providedIn: 'root'
 })
 export class IfNotConfiguredGuard implements CanLoad {
-  constructor(private router: Router, private accountStore: AccountStoreService) {
+  constructor(private router: Router) {
   }
 
 

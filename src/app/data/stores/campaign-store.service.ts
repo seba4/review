@@ -16,7 +16,7 @@ export class CampaignStoreService extends StoreService {
   constructor(private apiService: CampaignService, private storageService: CampaignLocalStorageService) {
     super();
     this.latestCampaignSettings$.subscribe(campaign => {
-      this.storeCampaignSettingsToLocalStorage();
+      this.storeCampaignSettingsToCache();
     });
   }
 
@@ -36,7 +36,10 @@ export class CampaignStoreService extends StoreService {
     this.latestCampaignSettingsSubject.next(campaign);
   }
 
-  storeCampaignSettingsToLocalStorage() {
+  /**
+   * Stores latest campaign information to Local Storage
+   */
+  storeCampaignSettingsToCache() {
     this.storageService.writeCampaign(this.latestCampaignSettings);
   }
 
@@ -48,22 +51,30 @@ export class CampaignStoreService extends StoreService {
     this.currentCampaignSettings = this.latestCampaignSettings;
   }
 
-  fetchCampaign() {
-    this.fetchCampaignFromLocalStorage().finally(() => {
-      this.fetchCampaignFromAPI();
-    });
+
+  /**
+   * Fetches Campaign data first from local Storage and then it gathers information from API.
+   */
+  fetchCampaign(): Promise<void> {
+    return this.loadCampaignFromCache().finally(async () => await this.fetchCampaignFromAPI());
   }
 
-  async fetchCampaignFromLocalStorage(): Promise<void> {
+  /**
+   * Loads Cached Campaign information from LocalStorage
+   */
+  async loadCampaignFromCache(): Promise<void> {
     this.storageService.readCampaign().then(localSettings => {
 
         if (!(localSettings instanceof Campaign)) {
           return;
         }
 
+        // If we don't have an active campaign yet we update it with gathered campaign information
         if (!this.currentCampaignSettings) {
           this.currentCampaignSettings = localSettings;
         }
+
+        // If Latest campaign settings are not yet loaded  we update it with gathered campaign information
         if (!this.latestCampaignSettings) {
           this.latestCampaignSettings = localSettings;
         }
@@ -71,15 +82,21 @@ export class CampaignStoreService extends StoreService {
     );
   }
 
+  /**
+   * Fetches Campaign information from API.
+   */
   fetchCampaignFromAPI() {
     this.apiService.readCampaignSettings().subscribe(apiSettings => {
         if (!(apiSettings instanceof Campaign)) {
           return;
         }
 
+        // If we don't have an active campaign yet we update it with API Campaign
         if (!this.currentCampaignSettings) {
           this.currentCampaignSettings = apiSettings;
         }
+
+        // If we already have an active campaign then we update latestCampaign information with API campaign
         if (!this.latestCampaignSettings) {
           this.latestCampaignSettings = apiSettings;
         }

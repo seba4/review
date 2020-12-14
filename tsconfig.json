@@ -1,7 +1,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
+    "baseUrl": "./src",
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
@@ -11,6 +11,22 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "es2015",
+    "paths": {
+      "@core/*": ["app/core/*"],
+      "@mocks/*": ["app/core/mocks/*"],
+      "@constants/*": ["app/core/constants/*"],
+      "@guards/*": ["app/core/guards/*"],
+      "@interceptors/*": ["app/core/interceptors/*"],
+      "@data/*": ["app/data/*"],
+      "@schema/*": ["app/data/schema/*"],
+      "@services/*": ["app/data/services/*"],
+      "@stores/*": ["app/data/stores/*"],
+      "@shared/*": ["app/shared/*"],
+      "@modules/*": ["app/modules/*"],
+      "@admin_modules/*": ["app/modules/admin/*"],
+      "@env/*": ["environments/*"],
+      "@validators/*": ["core/validators/*"]
+    },
     "lib": [
       "es2018",
       "dom"

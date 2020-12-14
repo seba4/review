@@ -1,0 +1,13 @@
+# /Users/sebastjanlajkovic/.config/tmuxinator/celra-uab-explorer.yml
+
+name: review-mobile-app
+root: ./
+
+windows:
+  - Default:
+      layout: main-vertical
+      panes:
+        - make watch
+        - make help
+        -
+  - Console:

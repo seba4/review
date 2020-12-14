@@ -45,7 +45,7 @@ export class AccountLocalStorageService {
    * @param data Account object which needs to be stored
    */
   async write(data: Account): Promise<any> {
-    console.log('Writing ACcount:', JSON.stringify(data));
+    console.log('Writing Account:', JSON.stringify(data));
     return await Plugins.Storage.set({ key: 'account', value: JSON.stringify(data) });
   }
 }
