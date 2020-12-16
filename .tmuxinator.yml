@@ -1,13 +1,15 @@
-# /Users/sebastjanlajkovic/.config/tmuxinator/celra-uab-explorer.yml
+# /Users/sebastjanlajkovic/.config/tmuxinator/s4-review-mobile-app.yml
 
 name: review-mobile-app
-root: ./
+root: .
 
 windows:
   - Default:
       layout: main-vertical
       panes:
-        - make watch
-        - make help
-        -
+        - npm test
+        - ionic serve
+        - watch docker ps
+        - code .
+  - Logs:
   - Console:
