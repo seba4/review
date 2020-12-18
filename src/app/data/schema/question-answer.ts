@@ -20,3 +20,11 @@ export interface QuestionWithAnswersI {
   question: Question;
   selectedValues: string[];
 }
+
+
+export interface SubmitedCampaigns {
+    campaignId: string;
+    questionId: string;
+    submitterId: string;
+    value: string;
+}

@@ -73,10 +73,10 @@ const campaignData = {
       active: true,
       questionTypeId: '5e4b2ebd-cbca-48a8-b9e5-0ff2bb5f2ed3', // Check Box input
       answerOptions: [
-        { title: 'Cevlji', value: 'Cevlji' },
-        { title: 'Hlace', value: 'Hlace' },
-        { title: 'Srajce', value: 'Srajce' },
-        { title: 'Spodje perilo', value: 'Spodje perilo' }
+        { title: 'Shoes', value: 'shoes' },
+        { title: 'Jeans', value: 'Jeans' },
+        { title: 'Shirts', value: 'Shirts' },
+        { title: 'Underwear', value: 'Underwear' }
       ]
     }
   ]

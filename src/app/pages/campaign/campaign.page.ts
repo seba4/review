@@ -8,6 +8,8 @@ import { QuestionType } from '@schema/question-type';
 import { QuestionTypeStoreService } from '@stores/question-type-store.service';
 import { Review } from '@schema/review';
 import { ReviewStoreService } from '@stores/review-store.service';
+import { FirebaseService } from '@services/firebase.service';
+import { SubmitedCampaigns } from '@schema/question-answer';
 
 @Component({
   selector: 'app-campaign',
@@ -26,7 +28,8 @@ export class CampaignPage implements OnInit {
   constructor(
     private campaignStore: CampaignStoreService,
     private questionTypeStore: QuestionTypeStoreService,
-    private  reviewStore: ReviewStoreService
+    private  reviewStore: ReviewStoreService,
+    private firebase: FirebaseService
   ) {
   }
 
@@ -92,7 +95,7 @@ export class CampaignPage implements OnInit {
 
   storeToAnsweredQuestion(questionData: QuestionWithAnswersI): void {
     const matchingAnswerIndex = this.answeredQuestions.findIndex(obj => obj.question === questionData.question);
-    matchingAnswerIndex ? this.answeredQuestions[matchingAnswerIndex] = questionData : this.answeredQuestions.push(questionData);
+    matchingAnswerIndex != -1 ? this.answeredQuestions[matchingAnswerIndex] = questionData : this.answeredQuestions.push(questionData);
   }
 
   isLastQuestion(question: Question): boolean {
@@ -118,9 +121,28 @@ export class CampaignPage implements OnInit {
       )
     });
 
-    console.log(review);
+    const campaignId = this.campaign.campaignId
+    const submitterId = this.firebase.generateGUID()
+    const result: SubmitedCampaigns[] = []
+    this.answeredQuestions.forEach(answer => {
+      const selectedValues = answer.selectedValues
+      const questionId = answer.question.questionId
+      for (let value of selectedValues) {
+        result.push({
+          campaignId: campaignId,
+          questionId: questionId,
+          submitterId: submitterId,
+          value: value
+        })
+      }
+    })
+    // Submit all campaign answers to Firebase db
+    result.forEach(campaign => {
+      this.firebase.addSubmitedCampaign(campaign)
+    })
+    console.log("SUBMITED:", result)
 
-    this.reviewStore.submitReview(review);
+    this.reviewStore.submitReview(review)
   }
 
   resetCampaign(): void {
