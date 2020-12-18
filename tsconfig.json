@@ -10,7 +10,7 @@
     "module": "esnext",
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es2015",
+    "target": "es5",
     "paths": {
       "@core/*": ["app/core/*"],
       "@mocks/*": ["app/core/mocks/*"],

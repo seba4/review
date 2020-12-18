@@ -11,6 +11,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
+// firebase imports, omit what you don't need for your app
+
+
 @NgModule({
 
   declarations: [AppComponent],
